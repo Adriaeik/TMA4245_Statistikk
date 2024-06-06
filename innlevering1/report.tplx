@@ -1,0 +1,20 @@
+((*- extends 'base.tplx' -*))
+
+% Inkluder MathJax for matematiske formler
+\begin{pyin}
+import nbconvert
+import os
+
+js = """
+<script type="text/javascript" async
+src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/MathJax.js?config=TeX-MML-AM_CHTML">
+</script>
+"""
+
+# Sett MathJax-innhold i document-preamble
+nbconvert.get_exporter('latex')(config=None, log=None).template_path.append(os.path.abspath('.'))
+
+with open('document-preamble.tex', 'w') as f:
+    f.write(js)
+\end{pyin}
+\input{document-preamble.tex}
